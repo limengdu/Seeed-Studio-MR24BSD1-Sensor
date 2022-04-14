@@ -15,7 +15,7 @@ void setup()
 void loop()
 {
   //Please fill in the data frame you want to set according to the datasheet(Excluding 2 Byte checksum frames)
-  unsigned char data[] = {0x55, 0x08, 0x00, 0x05, 0x01, 0x04, 0x03};
+  unsigned char data[] = {0x55, 0x07, 0x00, 0x01, 0x01, 0x01};
   
   unsigned int length = sizeof(data)/sizeof(unsigned char);
   unsigned char datas[length + 2];
