@@ -1,12 +1,22 @@
 #include "Arduino.h"
 #include "sleepbreathingradar.h"
 
+#ifdef __AVR__
+    #include <SoftwareSerial.h>
+    SoftwareSerial SSerial(2, 3); // RX, TX
+    #define Serial1 SSerial
+#endif
+
+void SleepBreathingRadar::SerialInit(){
+  Serial1.begin(9600);
+}
+
 // Receive data and process
 void SleepBreathingRadar::recvRadarBytes(){
   static boolean recvInProgress = false;
   static byte ndx = 0;
   byte startMarker = MESSAGE_HEAD;            //Header frame
-  byte rb;                                    //Each frame received
+  byte rb; // Each frame received
   while (Serial1.available() > 0 && newData == false) {
       rb = Serial1.read();
       if (recvInProgress == true) {           //Received header frame

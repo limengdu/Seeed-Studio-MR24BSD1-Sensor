@@ -53,8 +53,6 @@
 
 #define SLEEP_SCORE 0x01        //Sleep quality score
 
-
-
 class SleepBreathingRadar{
     private:
         
@@ -63,6 +61,7 @@ class SleepBreathingRadar{
         byte dataLen = 12;
         byte Msg[12];
         boolean newData = false;
+        void SerialInit();
         void recvRadarBytes();
         void Bodysign_judgment(byte inf[], float Move_min, float Move_max);
         void Situation_judgment(byte inf[]);
