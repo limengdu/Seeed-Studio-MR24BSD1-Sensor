@@ -7,7 +7,7 @@ void setup()
   radar.SerialInit();
   Serial.begin(9600);
   delay(1500);
-  Serial.println("Readly");
+  Serial.println("Ready");
 }
 
 void loop()
