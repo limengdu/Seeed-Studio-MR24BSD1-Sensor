@@ -1,9 +1,9 @@
 ---
-name: 
-category: 
-bzurl: 
+name:
+category:
+bzurl:
 prodimagename:
-surveyurl: 
+surveyurl:
 sku: 101990885
 tags:
 ---
@@ -14,22 +14,22 @@ tags:
 
 ## Introduction
 
-The MR24BSD1 24GHz radar module applies Dopplor detected theory to implement human sleep quality monitoring providing a fully total private and secure sensing environment, independently from other noisy influences. It is a useful privacy-protected, secure sensor radar systems in smart home applications like sleep safety alarm, sleep respiratory detection.
+The MR24BSD1 24GHz radar module applies Doppler detected theory to implement human sleep quality monitoring providing a fully total private and secure sensing environment, independently from other noisy influences. It is a useful privacy-protected, secure sensor radar system in smart home applications like sleep safety alarms and sleep respiratory detection.
 
 ### Application
 
 - Smart Home
 - Smart Hotel
-- Human Sleep Quailty Monitor
+- Human Sleep Quality Monitor
 
 ### Feature
 
 - Enabled theory: Implement detection based on 24GHz mmWave Doppler radar technology
 - Vital signs detection: Sense simultaneously moving and stationary persons, detect respiratory sleep to monitor human sleep quality
 - Perfect privacy protection: Apply mmWave monitoring technology to provide surveillance capabilities without identification
-- Health-friendly working status: Output power as low as harmless to human body
-- High stability: Independ from temperature, humidity, noise, airflow, dust, light and other environmental influences
-- High flexibility radar: Support secondary development and adapt to various scenarios applications
+- Health-friendly working status: Output power as low as harmless to the human body
+- High stability: Independent from temperature, humidity, noise, airflow, dust, light and other environmental influences
+- High flexibility radar: Support secondary development and adapt to various scenarios and applications
 
 ### Specification
 
@@ -38,23 +38,23 @@ The MR24BSD1 24GHz radar module applies Dopplor detected theory to implement hum
 |  Operating voltage (VCC)                   |  4.5           |  5.0            |  6             |  V    |
 |  Operating current (ICC)                   |  90            |  93             |  100           |  mA   |
 |  Operating I\O Inflow/Output Current (IIO) |  -             |  8              |  20            |  mA   |
-|  Operating temperature (TOP)               |  -20           |  -              |  +60           |  ℃    |
-|  Storage temperature (TST)                 |  -40           |  -              |  +80           |  ℃    |
+|  Operating temperature (TOP)               |  -20           |  -              |  +60           |  ℃   |
+|  Storage temperature (TST)                 |  -40           |  -              |  +80           |  ℃   |
 
 ## Hardware Overview
 
-Before everything starts, it is quite essential to have some basic parameters of the product. The following table provides information about the characteristics of Sleep Breathing Monitoring Radar.
+Before everything starts, it is quite essential to have some basic parameters of the product. The following table provides information about the characteristics of the Sleep Breathing Monitoring Radar.
 
 <div align=center><img width = 800 src="https://files.seeedstudio.com/wiki/60GHzradar/pihnout.png"/></div>
 
 !!!Note
     We have some updates about the hardware.
 
-1. There is an resistor used for filtering RC. Since it doesn't use in the module as we tested, it has been removed.
+1. There is a resistor used for filtering RC. Since it doesn't use in the module as we tested, it has been removed.
 
 <div align=center><img width = 300 src="https://files.seeedstudio.com/wiki/mmWave-radar/radarpd.png"/></div>
 
-2.Since we removed the LED from the module, the resistor here limited cicuit has been canceled as well.
+2. Since we removed the LED from the module, the resistor here limited circuit has been canceled as well.
 
 <div align=center><img width = 300 src="https://files.seeedstudio.com/wiki/mmWave-radar/radarpd2.png"/></div>
 
@@ -63,7 +63,7 @@ Before everything starts, it is quite essential to have some basic parameters of
 ## Arduino Library Overview
 
 !!!Tip
-    If this is your first time using Arduino, we highly recommend you to refer to [Getting Started with Arduino](https://wiki.seeedstudio.com/Getting_Started_with_Arduino/).
+    If this is your first time using Arduino, we highly recommend you refer to [Getting Started with Arduino](https://wiki.seeedstudio.com/Getting_Started_with_Arduino/).
 
 The library code used in this example can be downloaded by clicking the icon below.
 
@@ -78,44 +78,45 @@ Before we get started developing a sketch, let's look at the available functions
 **Return value:** None
 
 - `void Bodysign_judgment(byte inf[], float Move_min, float Move_max)` —— The data returned by the radar contains a large amount of physical data. The user has the flexibility to adjust the detected motion information based on the sign data and the decoding algorithm provided by the function. The content of the judgment will be output via the serial port.
-**Input parameters:** 
-    - `byte inf[]` —— Data frames sent by the radar.
-    - `float Move_min` —— Determine the threshold of the user being in a stationary or unoccupied state.
-    - `float Move_max` —— Determine the threshold value for the user to be in a stationary state or a state where someone is in motion.
+**Input parameters:**
+  - `byte inf[]` —— Data frames sent by the radar.
+  - `float Move_min` —— Determine the threshold of the user being in a stationary or unoccupied state.
+  - `float Move_max` —— Determine the threshold value for the user to be in a stationary state or a state where someone is in motion.
 
     **Return value:** None
     About the description of the sign parameters: Theoretically, the calculated values of the sign parameters range from **0 to 100**. When the calculated value is **0**, it means that **no one** is detected in the surrounding environment. When the calculated value is **1**, it means that the environment is detected to be occupied and in a **stationary state**. A calculated value of **2 to 100** indicates that the surroundings are detected to be occupied and **active**.
 
 - `void Situation_judgment(byte inf[])` —— This function detects whether the human body is approaching or moving away from the location where the radar is located and determines the movement of the human body, according to the algorithm inside the radar. This information will be output through the serial port.
-**Input parameters:** 
-    - `byte inf[]` —— Data frames sent by the radar.
+**Input parameters:**
+  - `byte inf[]` —— Data frames sent by the radar.
 
-    **Return value:** None
+  **Return value:** None
 
-- `void Sleep_inf(byte inf[])` —— This function completes the decoding of the sleep information returned by the radar and prints the results of the radar detection through the serial port. Sleep information includes: breathing rate, breathing conditions, scene judgment, sleep conditions and quality, and sleep duration, etc.
-**Input parameters:** 
-    - `byte inf[]` —— Data frames sent by the radar.
+- `void Sleep_inf(byte inf[])` —— This function completes the decoding of the sleep information returned by the radar and prints the results of the radar detection through the serial port. Sleep information includes breathing rate, breathing conditions, scene judgment, sleep conditions and quality, sleep duration, etc.
+**Input parameters:**
+  - `byte inf[]` —— Data frames sent by the radar.
 
-    **Return value:** None
+  **Return value:** None
 
 - `unsigned short int us_CalculateCrc16(unsigned char *lpuc_Frame, unsigned short int lus_Len)` —— This function is used to generate CRC16 checksum.
-**Input parameters:** 
-    - `unsigned char *lpuc_Frame` —— The data frame you want to send to the radar (not including the final 2 Byte checksum frame).
-    - `unsigned short int lus_Len` —— The length of the data frame you want to send to the radar.
+**Input parameters:**
+  - `unsigned char *lpuc_Frame` —— The data frame you want to send to the radar (not including the final 2 Byte checksum frame).
+  - `unsigned short int lus_Len` —— The length of the data frame you want to send to the radar.
 
-    **Return value:** 2 Byte integer type check digit.
+  **Return value:** 2 Byte integer type check digit.
 
 - `void SleepTimeCalculate(unsigned char sleeptime[])` —— This function is used to parse the data frames returned by the radar into sleep time. The sleep time is printed out through the serial port.
-**Input parameters:** 
-    - `unsigned char sleeptime[]` —— The 4 Byte sleep duration data returned by the radar.
+**Input parameters:**
+  - `unsigned char sleeptime[]` —— The 4 Byte sleep duration data returned by the radar.
 
-    **Return value:** None
+  **Return value:** None
 
 - `void SerialInit()` —— Set the radar serial port baud rate to 9600. If it is a Seeeduino board, set the soft serial port to RX: 2, TX: 3.
 **Input parameters:** None
 **Return value:** None
 
 ### Default Variables
+
 ```c
 #define MESSAGE_HEAD 0x55       //Data frame header
 #define ACTIVE_REPORT 0x04      //Proactive reporting
@@ -177,10 +178,9 @@ boolean newData = false;        //Controlling the reception of a new set of data
 
 ### Installation
 
-**Step 1.** You need to Install an Arduino Software.
+**Step 1.** You need to Install Arduino IDE Software.
 
 <p style=":center"><a href="https://www.arduino.cc/en/Main/Software" target="_blank"><div align=center><img width = 600 src="https://files.seeedstudio.com/wiki/Seeeduino_Stalker_V3_1/images/Download_IDE.png" /></div></a></p>
-
 
 **Step 2.** Launch the Arduino application.
 
@@ -196,15 +196,13 @@ boolean newData = false;        //Controlling the reception of a new set of data
 
 - If you want to use **XIAO BLE** for the later routines, please refer to [this tutorial](https://wiki.seeedstudio.com/XIAO_BLE/#software-setup) to finish adding.
 
-
 **Step 4.** Install the Arduino code library.
 
 Start by getting the code base from [GitHub](https://github.com/limengdu/Seeed-Studio-MR24BSD1-Sensor) and downloading it to your local computer.
 
-Since you have downloaded the zip Library, open your Arduino IDE, click on **Sketch > Include Library > Add .ZIP Library**. Choose the zip file you just downloaded，and if the library install correct, you will see **Library added to your libraries** in the notice window. Which means the library is installed successfully.
+Since you have downloaded the zip Library, open your Arduino IDE, click on **Sketch > Include Library > Add .ZIP Library**. Choose the zip file you just downloaded and if the library installs correctly, you will see **Library added to your libraries** in the notice window. Which means the library is installed successfully.
 
 <div align=center><img width = 600 src="https://files.seeedstudio.com/wiki/Get_Started_With_Arduino/img/Add_Zip.png"/></div>
-
 
 ## Arduino Example
 
@@ -218,8 +216,6 @@ Before completing the following examples, you will need to prepare the following
 |:--------------:|:--------------:|:--------------:|
 |<div align=center><img width = 210 src="https://files.seeedstudio.com/wiki/60GHzradar/1.jpeg"/></div>| <div align=center><img width = 210 src="https://files.seeedstudio.com/wiki/XIAO-BLE/102010469_Front-14.jpg"/></div>| <div align=center><img width = 150 src="https://files.seeedstudio.com/wiki/60GHzradar/dupont.jpg"/></div>|
 |[**24GHz mmWave Radar Sensor**](https://www.seeedstudio.com/24GHz-mmWave-Radar-Sensor-Sleep-Breathing-Monitoring-Module-p-5304.html?queryID=c2e8ac7c8c6fb3833f49a1a3b5083a04&objectID=5304&indexName=bazaar_retailer_products)|[**Seeed XIAO BLE nRF52840 Sense**](https://www.seeedstudio.com/Seeed-XIAO-BLE-Sense-nRF52840-p-5253.html?queryID=4bbd8c09f20216aa26f6b5a9040504d0&objectID=5253&indexName=bazaar_retailer_products)|**2mm to 2.54mm Pitch Ribbon Cable**|
-
-
 
 **Step 1.** Connect the device to the computer through the main board. The wiring diagram is shown in the table below.
 
@@ -262,8 +258,6 @@ Before completing the following examples, you will need to prepare the following
 <div align=center><img width = 600 src="https://files.seeedstudio.com/wiki/60GHzradar/3.png"/></div>
 
 In this example, we will demonstrate how the radar works with our popular product XIAO BLE.
-
-
 
 ### Demo1 Decode built-in radar algorithm data output environment status
 
@@ -329,16 +323,13 @@ Upload program. Opening your serial monitor to a baud rate of 9600 should show t
 <div align=center><img width = 600 src="https://files.seeedstudio.com/wiki/60GHzradar/5.png"/></div>
 
 !!!Tip
-    If you do not see data after opening the serial monitor it may be normal. The acquisition of this part of the radar data depends on the changes in human movement within the radar monitoring range. Only when the movement of the person within range changes, the radar will send data, and only then will the data be printed out. 
+    If you do not see data after opening the serial monitor it may be normal. The acquisition of this part of the radar data depends on the changes in human movement within the radar monitoring range. Only when the movement of the person within range changes, the radar will send data, and only then will the data be printed out.
 
     If you want to see what data is returned by radar, you can uncomment `radar.ShowData(dataMsg);`, which will output the complete set of received data frames through the serial monitor.
-
 
 ### Demo2 Obtaining human motion using feature parameter analysis
 
 Among the large amount of data returned by radar, information on physical data makes up the majority of the information. Sometimes, over-reliance on the radar's own algorithms can yield less than satisfactory results in some scenarios. Then, we can choose to use the information returned by the radar to make suitable adjustments according to the actual application scenarios.
-
-
 
 The code in this example is as follows.
 
@@ -382,7 +373,7 @@ Once the dataMsg array is obtained, we can pass the data of this array as the fi
 
 The second and third parameters of the function `Bodysign_judgment()` are the critical values for judging the unoccupied and the human body at rest, the critical values for the human body at rest and in motion, respectively.
 
-(1, 15) means that when the calculated value of the body sign is less than 1, output no one is in the environment. When the somatic value is greater than or equal to 1 and less than 15, the output is that the current environment is occupied by someone in a stationary state. When the value of body sign is greater than or equal to 35, it outputs that there is someone moving in the environment.
+(1, 15) means that when the calculated value of the body sign is less than 1, output no one is in the environment. When the somatic value is greater than or equal to 1 and less than 15, the output is that the current environment is occupied by someone in a stationary state. When the value of the body sign is greater than or equal to 35, it outputs that someone is moving in the environment.
 
 Upload program. Opening your serial monitor to a baud rate of 9600 should show the result. The output should look something like the below image.
 
@@ -390,7 +381,6 @@ Upload program. Opening your serial monitor to a baud rate of 9600 should show t
 
 !!!Tip
     The values following the output data frame represent the calculated sign values.
-
 
 ### Demo 3 Get sleep detection data
 
@@ -439,7 +429,6 @@ When the dataMsg list is completely obtained, it will be used as the parameter o
 Upload program. Opening your serial monitor to a baud rate of 9600 should show the result. The output should look something like the below image.
 
 <div align=center><img width = 600 src="https://files.seeedstudio.com/wiki/60GHzradar/7.png"/></div>
-
 
 ### Demo 4 Sending data to radar
 
@@ -502,6 +491,7 @@ void loop()
 **Step 3.** Modifies the content of the data frame to generate the complete data frame sent to the radar.
 
 What we need to modify is the `data[]` array in the loop.
+
 ```c
 //Please fill in the data frame you want to set according to the datasheet(Excluding 2 Byte checksum frames)
 unsigned char data[] = {0x55, 0x08, 0x00, 0x05, 0x01, 0x04, 0x03};
@@ -510,16 +500,16 @@ unsigned char data[] = {0x55, 0x08, 0x00, 0x05, 0x01, 0x04, 0x03};
 The places we need to modify are the second element, the fourth to the last element. The header frame 0x55 is fixed and does not need to be modified. The second frame is the length frame, please modify it according to the length of the data you send. The third frame is fixed to 0x00. The fourth frame is the function code, the fifth frame is the address code 1, and so on.
 
 !!!Tip
-    About the length frame calculation method: 
+    About the length frame calculation method:
     Length = Data Length + Function Code + Address Code 1 + Address Code 2 + Data + Checksum. (Head frames are not counted)
 
     See Chapter 8 of the [user manual](https://files.seeedstudio.com/wiki/60GHzradar/24GHz-Sleep-monitorng-user-manual.pdf) for more information on frame formats and rules.
-  
+
 Upload program. Opening your serial monitor to a baud rate of 9600 should show the result. The output should look something like the below image.
 
 <div align=center><img width = 600 src="https://files.seeedstudio.com/wiki/60GHzradar/10.png"/></div>
 
-The complete data that needs to be sent to the radar will be displayed in the serial monitor.
+The complete data that needs to be sent to the radar will be displayed on the serial monitor.
 
 **Other ways**
 
@@ -656,13 +646,13 @@ Use a software like serial debugging assistant to select the serial port where t
 <div align=center><img width = 300 src="https://files.seeedstudio.com/wiki/60GHzradar/17.png"/></div>
 
 !!!Attention
-    24GHz radar needs 5V power supply, otherwise the radar may not work properly.
+    24GHz radar needs a 5V power supply, otherwise, the radar may not work properly.
 
 After a successful connection, you will see the radar sending a steady stream of messages.
 
 <div align=center><img width = 800 src="https://files.seeedstudio.com/wiki/60GHzradar/16.png"/></div>
 
-Paste the complete data frame we obtained in **step3** onto the send area of the software. Then click Send.
+Paste the complete data frame we obtained in **step 3** onto the send area of the software. Then click Send.
 
 <div align=center><img width = 800 src="https://files.seeedstudio.com/wiki/60GHzradar/18.png"/></div>
 
@@ -670,7 +660,6 @@ You can look out for a set of data returned with the third element being 0x03. T
 
 !!!Attention
     If you choose **ASCII** as the format for sending data, each data set needs to be prefixed with **0x**. If you choose **HEX**, then each set of data does not need to be prefixed with **0x**.
-
 
 ## Troubleshooting
 
@@ -683,8 +672,6 @@ You can look out for a set of data returned with the third element being 0x03. T
 
 > At this time, you can use your finger to lightly press the reset button on top of XIAO BLE to re-upload the program to run.
 
-
-
 ## Resources
 
 - [PDF] [Sleep Breathing Radar Sensor Datasheet](https://files.seeedstudio.com/wiki/mmWave-radar/MR24BSD1_Datasheet.pdf)
@@ -696,6 +683,4 @@ You can look out for a set of data returned with the third element being 0x03. T
 
 Please do not hesitate to submit the issue into our [forum](https://forum.seeedstudio.com/).
 
-
 <br /><p style="text-align:center"><a href="https://www.seeedstudio.com/act-4.html?utm_source=wiki&utm_medium=wikibanner&utm_campaign=newproducts" target="_blank"><img src="https://files.seeedstudio.com/wiki/Wiki_Banner/new_product.jpg" /></a></p>
-
