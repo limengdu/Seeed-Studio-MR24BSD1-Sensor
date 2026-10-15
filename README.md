@@ -65,9 +65,22 @@ Before everything starts, it is quite essential to have some basic parameters of
 !!!Tip
     If this is your first time using Arduino, we highly recommend you to refer to [Getting Started with Arduino](https://wiki.seeedstudio.com/Getting_Started_with_Arduino/).
 
-The library code used in this example can be downloaded by clicking the icon below.
+The library source used in this example is in this repository. Get it in one of these ways:
 
-<p style=":center"><a href="https://github.com/limengdu/Seeed-Studio-MR24BSD1-Sensor" target="_blank"><div align=center><img width = 300 src="https://files.seeedstudio.com/wiki/seeed_logo/DOWNLOAD.png" /></div></a></p>
+- **Download ZIP** (for Arduino **Sketch > Include Library > Add .ZIP Library**): [Seeed-Studio-MR24BSD1-Sensor-main.zip](https://github.com/limengdu/Seeed-Studio-MR24BSD1-Sensor/archive/refs/heads/main.zip)
+- **Clone with Git**:
+
+```bash
+git clone https://github.com/limengdu/Seeed-Studio-MR24BSD1-Sensor.git
+```
+
+- **Browse the source files**: [sleepbreathingradar.h](./sleepbreathingradar.h), [sleepbreathingradar.cpp](./sleepbreathingradar.cpp), [examples](./examples)
+
+<p align="center">
+  <a href="https://github.com/limengdu/Seeed-Studio-MR24BSD1-Sensor/archive/refs/heads/main.zip">
+    <img src="https://files.seeedstudio.com/wiki/seeed_logo/DOWNLOAD.png" width="300" alt="Download the Arduino library ZIP">
+  </a>
+</p>
 
 ### Function
 
@@ -199,9 +212,9 @@ boolean newData = false;        //Controlling the reception of a new set of data
 
 **Step 4.** Install the Arduino code library.
 
-Start by getting the code base from [GitHub](https://github.com/limengdu/Seeed-Studio-MR24BSD1-Sensor) and downloading it to your local computer.
+Download the library ZIP from GitHub: [Seeed-Studio-MR24BSD1-Sensor-main.zip](https://github.com/limengdu/Seeed-Studio-MR24BSD1-Sensor/archive/refs/heads/main.zip).
 
-Since you have downloaded the zip Library, open your Arduino IDE, click on **Sketch > Include Library > Add .ZIP Library**. Choose the zip file you just downloaded，and if the library install correct, you will see **Library added to your libraries** in the notice window. Which means the library is installed successfully.
+After the ZIP has downloaded, open your Arduino IDE, click on **Sketch > Include Library > Add .ZIP Library**. Choose the zip file you just downloaded, and if the library installed correctly, you will see **Library added to your libraries** in the notice window. Which means the library is installed successfully.
 
 <div align=center><img width = 600 src="https://files.seeedstudio.com/wiki/Get_Started_With_Arduino/img/Add_Zip.png"/></div>
 
@@ -687,6 +700,7 @@ You can look out for a set of data returned with the third element being 0x03. T
 
 ## Resources
 
+- [ZIP] [Arduino library source (this repository)](https://github.com/limengdu/Seeed-Studio-MR24BSD1-Sensor/archive/refs/heads/main.zip)
 - [PDF] [Sleep Breathing Radar Sensor Datasheet](https://files.seeedstudio.com/wiki/mmWave-radar/MR24BSD1_Datasheet.pdf)
 - [PDF]    [24GHz Sleep Breathing Radar Sensor User Manual](https://files.seeedstudio.com/wiki/mmWave-radar/MR24BSD1_User_Manual.pdf)
 - [ZIP] [24GHz Respiratory schematic](https://files.seeedstudio.com/wiki/60GHzradar/24GHz-respiratory-schematic.zip)
